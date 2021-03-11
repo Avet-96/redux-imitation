@@ -1,9 +1,7 @@
 import {connect} from "../my-redux";
 import {changeStepSize} from "../store/action/actions";
 
-const Step = (props) => {
-    return (
-        <div>
+const Step = props => <div>
             <div>Значение счётчика должно увеличиваться или уменьшаться на заданную величину шага</div>
             <div>Текущая величина шага: {props.stepSize}</div>
             <input
@@ -14,10 +12,9 @@ const Step = (props) => {
                 onChange={({target}) => props.changeSize(changeStepSize(target.value))}
             />
         </div>
-    )
-}
 
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = state => ({
     stepSize: state.changeNumber.stepSize
 })
 const mapDispatchToProps = dispatch => ({

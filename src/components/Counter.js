@@ -1,16 +1,13 @@
 import {updateCounter} from "../store/action/actions";
 import {connect} from "../my-redux";
 
-const Counter = (props) => {
-    return (
-        <div>
+const Counter = props => <div>
             <button onClick={() => props.change(updateCounter(-1))}>-</button>
             <span> {props.counter} </span>
             <button onClick={() => props.change(updateCounter(1))}>+</button>
         </div>
-    )
-}
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = state => ({
     counter: state.changeNumber.counter
 })
 const mapDispatchToProps = dispatch => ({

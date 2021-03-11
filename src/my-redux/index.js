@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createContext} from "react";
 
 const createStore = reducer => {
     let state;
@@ -22,14 +22,12 @@ const combineReducers = reducers => {
     const nextState = {};
     const functionsReducer = {};
     const reducersKeys = Object.keys(reducers);
-
     reducersKeys.forEach(key => {
         if (typeof reducers[key] === "function") {
             functionsReducer[key] = reducers[key];
         }
     });
     const reducerFunctionsKeys = Object.keys(functionsReducer);
-
     return (state = {}, action) => {
         reducerFunctionsKeys.forEach(key => {
             const reducer = functionsReducer[key];
@@ -39,11 +37,10 @@ const combineReducers = reducers => {
     };
 };
 
-const ReduxContext = React.createContext("redux");
+const ReduxContext = createContext("redux");
 
-const Provider = ({store, children}) => (
-    <ReduxContext.Provider value={store}>{children}</ReduxContext.Provider>
-);
+const Provider = ({store, children}) => <ReduxContext.Provider value={store}>{children}</ReduxContext.Provider>
+
 
 const connect = (mapStateToProps, mapDispatchToProps) => Component => {
     class Connect extends React.Component {
@@ -60,22 +57,18 @@ const connect = (mapStateToProps, mapDispatchToProps) => Component => {
 
         render() {
             const {store} = this.props;
-
-            return (
-                <Component
-                    {...this.props}
-                    {...mapStateToProps(store.getState())}
-                    {...mapDispatchToProps(store.dispatch)}
-                />
-            );
+            return <Component
+                {...this.props}
+                {...mapStateToProps(store.getState())}
+                {...mapDispatchToProps(store.dispatch)}
+            />
         }
     }
 
-    return props => (
-        <ReduxContext.Consumer>
-            {store => <Connect {...props} store={store}/>}
-        </ReduxContext.Consumer>
-    );
+    return props => <ReduxContext.Consumer>
+        {store => <Connect {...props} store={store}/>}
+    </ReduxContext.Consumer>
+
 };
 
 
