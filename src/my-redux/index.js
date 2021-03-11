@@ -78,4 +78,5 @@ const connect = (mapStateToProps, mapDispatchToProps) => Component => {
     );
 };
 
+
 export {createStore, combineReducers, connect, Provider};
