@@ -1,6 +1,6 @@
 import {combineReducers} from "../../my-redux";
-import pluseminus from "./pluseminus";
+import changeNumber from "./changeNumber";
 
 export default combineReducers({
-    pluseminus: pluseminus
+    changeNumber:  changeNumber
 });

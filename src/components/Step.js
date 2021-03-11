@@ -11,17 +11,17 @@ const Step = (props) => {
                 min="1"
                 max="5"
                 value={props.stepSize}
-                onChange={({target}) =>props.changeSize(changeStepSize(target.value))}
+                onChange={({target}) => props.changeSize(changeStepSize(target.value))}
             />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    stepSize: state.pluseminus.stepSize
+    stepSize: state.changeNumber.stepSize
 })
 const mapDispatchToProps = dispatch => ({
-    changeSize:dispatch
+    changeSize: dispatch
 })
 
 export default connect(
